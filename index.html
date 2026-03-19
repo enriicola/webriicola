@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gohan's World</title>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .error-msg {
+            color: #e53e3e;
+            background: #fff5f5;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body x-data="{ 
+    photos: [], 
+    currentPhoto: '', 
+    loading: false,
+    errorMessage: '',
+    async init() {
+        try {
+            const response = await fetch('photos.json');
+            this.photos = await response.json();
+        } catch (e) {
+            this.errorMessage = 'Failed to load photos.json';
+        }
+    },
+    async showRandomCat() {
+        this.loading = true;
+        this.errorMessage = '';
+        const random = this.photos[Math.floor(Math.random() * this.photos.length)];
+        this.currentPhoto = (typeof random === 'object') ? random.url : random;
+    }
+}">
+    <div class="container">
+        <div class="phrase">Si sta come i gatti
+Nelle scatole
+A casa di Schrödinger</div>
+        
+        <div class="image-card" x-show="currentPhoto || loading" x-cloak>
+            <div class="image-wrapper">
+                <div x-show="loading" class="loading-spinner"></div>
+                
+                <img :src="currentPhoto" 
+                     x-show="!loading && !errorMessage" 
+                     @load="loading = false"
+                     @error="loading = false; errorMessage = 'Failed to load: ' + currentPhoto"
+                     alt="Gohan the cat">
+
+                <div x-show="errorMessage" class="error-msg" x-text="errorMessage"></div>
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem;">
+            <button @click="showRandomCat()">Show random Gohan</button>
+        </div>
+    </div>
+</body>
+</html>

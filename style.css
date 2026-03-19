@@ -1,0 +1,104 @@
+[x-cloak] { display: none !important; }
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f4f8;
+    color: #1a202c;
+}
+
+.container {
+    text-align: center;
+    padding: 2rem;
+    max-width: 600px;
+    width: 100%;
+}
+
+.phrase {
+    font-size: 2.2rem;
+    line-height: 1.4;
+    margin-bottom: 2.5rem;
+    font-weight: 800;
+    white-space: pre-line;
+    color: #2d3748;
+    letter-spacing: -0.025em;
+}
+
+button {
+    padding: 1.25rem 3rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    /* Darkened orange for better contrast (WCAG AA compliant) */
+    background-color: #c05621; 
+    color: #ffffff;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+button:hover {
+    background-color: #9c4221;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.image-card {
+    margin-top: 3.5rem;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+.image-wrapper {
+    position: relative;
+    background: #edf2f7;
+    border-radius: 1rem;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    max-width: 100%;
+    max-height: 600px;
+    border-radius: 0.75rem;
+    object-fit: contain;
+    display: block;
+}
+
+.photo-date {
+    margin-top: 1.25rem;
+    font-size: 1rem;
+    color: #4a5568;
+    font-weight: 600;
+    font-family: monospace;
+}
+
+.loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #c05621;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
