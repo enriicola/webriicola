@@ -16,11 +16,9 @@ fi
 
 # sync to Nginx dest_path
 sudo rsync -av --delete \
-    --exclude='.git/' \
-    --exclude='.gitignore' \
-    --exclude='deploy.sh' \
-    --exclude='test.py' \
-    --exclude='README.md' \
+    --exclude='*git*' \
+    --exclude='*.sh' \
+    --exclude='*.md' \
     --exclude='*.py' \
     "$SRC_PATH/" "$DEST_PATH/"
 
