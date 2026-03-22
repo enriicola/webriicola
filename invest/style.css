@@ -1,0 +1,85 @@
+:root { 
+    --p: #2563eb; 
+    --s: #1e293b; 
+    --bg: #f8fafc; 
+    --card: #ffffff; 
+}
+
+body { 
+    font-family: -apple-system, system-ui, sans-serif; 
+    background: var(--bg); 
+    color: var(--s); 
+    margin: 0; 
+    padding: 20px; 
+    line-height: 1.5; 
+}
+
+.container { 
+    max-width: 1000px; 
+    margin: 0 auto; 
+}
+
+.grid { 
+    display: grid; 
+    grid-template-columns: 1fr 2fr; 
+    gap: 20px; 
+}
+
+.card { 
+    background: var(--card); 
+    padding: 20px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); 
+    margin-bottom: 20px; 
+}
+
+h1, h2 { 
+    margin-top: 0; 
+    color: var(--s); 
+}
+
+label { 
+    display: block; 
+    margin-top: 10px; 
+    font-weight: bold; 
+    font-size: 0.9em; 
+}
+
+input, select { 
+    width: 100%; 
+    padding: 8px; 
+    margin-top: 5px; 
+    border: 1px solid #ddd; 
+    border-radius: 6px; 
+    box-sizing: border-box; 
+}
+
+.stats { 
+    display: flex; 
+    gap: 20px; 
+    margin-top: 20px; 
+}
+
+.stat-box { 
+    flex: 1; 
+    padding: 15px; 
+    border-radius: 8px; 
+    background: #f1f5f9; 
+    text-align: center; 
+}
+
+.stat-val { 
+    display: block; 
+    font-size: 1.5em; 
+    font-weight: bold; 
+    color: var(--p); 
+}
+
+.highlight { 
+    color: #dc2626; 
+    font-weight: bold; 
+}
+
+@media (max-width: 768px) { 
+    .grid { grid-template-columns: 1fr; } 
+}
