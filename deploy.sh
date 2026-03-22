@@ -19,11 +19,17 @@ if ! git rev-parse --verify --quiet origin/main >/dev/null; then
     exit 1
 fi
 
+# photos have to be indexed after the reset, in order to not be overwritten by the reset itself
+INDEX_PHOTOS=0
 if ! git diff --quiet HEAD origin/main -- gohan/imgs/; then
-    python3 "$REPO_PATH/gohan/reindex_photos.py" | tee -a "$LOG_FILE"
+    INDEX_PHOTOS=1
 fi
 
 git reset --hard origin/main | tee -a "$LOG_FILE"
+
+if [[ "$INDEX_PHOTOS" -eq 1 ]]; then
+    python3 "$REPO_PATH/gohan/index_photos.py" | tee -a "$LOG_FILE"
+fi
 
 # sync to Nginx dest_path
 sudo -n rsync -av --delete \
