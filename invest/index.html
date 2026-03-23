@@ -1,98 +1,105 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investimento vs Market Timing</title>
+    <title>Investimento passivo vs Market Timing (o Trading, che dir si voglia)</title>
     <!-- Chart.js da CDN per evitare node_modules -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="container">
-    <header>
-        <h1>Simulatore Patrimoniale</h1>
-        <p>Perché "aspettare il momento giusto" è il modo più veloce per <span class="highlight">perdere</span> soldi.</p>
-    </header>
+    <div class="container">
+        <header>
+            <h1>Simulatore Patrimoniale</h1>
+            <p>Perché "aspettare il momento giusto" è il modo più veloce per <span class="highlight">perdere</span>
+                soldi.</p>
+        </header>
 
-    <div class="grid">
-        <aside>
-            <div class="card">
-                <h2>Il Tuo Scenario</h2>
-                <label>Capitale già Investito (€)</label>
-                <input type="number" id="initial" value="1000">
-                
-                <label>Liquidità Ferma su Fineco (€)</label>
-                <input type="number" id="idleCash" value="6000">
+        <div class="grid">
+            <aside>
+                <div class="card">
+                    <h2>Il Tuo Scenario</h2>
+                    <label>Capitale già Investito (€)</label>
+                    <input type="number" id="initial" value="1000">
 
-                <label>Orizzonte Temporale (Anni)</label>
-                <input type="number" id="years" value="10">
-                
-                <label>Rendimento NASDAQ (%)</label>
-                <input type="number" id="return" value="12" step="0.5">
+                    <label>Liquidità Ferma su Fineco (€)</label>
+                    <input type="number" id="idleCash" value="6000">
 
-                <label>Commissione Fineco per ordine (€)</label>
-                <input type="number" id="finecoFee" value="19" step="1">
+                    <label>Orizzonte Temporale (Anni)</label>
+                    <input type="number" id="years" value="10">
 
-                <div style="background: #fff1f2; padding: 10px; border-radius: 8px; margin-top: 15px; border: 1px solid #fecaca;">
-                    <h3 style="margin-top: 0; font-size: 0.9em; color: #9f1239;">Parametri Market Timing</h3>
-                    <label>Operazioni all'anno (Compra/Vendi)</label>
-                    <input type="number" id="tradesPerYear" value="4" min="1">
-                    
-                    <label>Efficienza del Timing (%)</label>
-                    <input type="range" id="timingEfficiency" value="70" min="0" max="100" step="5">
-                    <div style="font-size: 0.8em; color: #64748b; text-align: center;">
-                        <span id="effVal">70</span>% del rendimento di mercato
+                    <label>Rendimento NASDAQ (%)</label>
+                    <input type="number" id="return" value="12" step="0.5">
+
+                    <label>Commissione Fineco per ordine (€)</label>
+                    <input type="number" id="finecoFee" value="19" step="1">
+
+                    <div
+                        style="background: #fff1f2; padding: 10px; border-radius: 8px; margin-top: 15px; border: 1px solid #fecaca;">
+                        <h3 style="margin-top: 0; font-size: 0.9em; color: #9f1239;">Parametri Market Timing</h3>
+                        <label>Operazioni all'anno (Compra/Vendi)</label>
+                        <input type="number" id="tradesPerYear" value="4" min="1">
+
+                        <label>Efficienza del Timing (%)</label>
+                        <input type="range" id="timingEfficiency" value="70" min="0" max="100" step="5">
+                        <div style="font-size: 0.8em; color: #64748b; text-align: center;">
+                            <span id="effVal">70</span>% del rendimento di mercato
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <label>Interesse TR su Liquidità (%)</label>
+                    <input type="number" id="trInterest" value="2" step="0.1">
+                </div>
+
+                <div class="card">
+                    <h2>Confronto Broker</h2>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Fineco (Standard):</span> <strong>19€</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Trade Republic:</span> <strong>1€</strong>
+                    </div>
+                </div>
+            </aside>
+
+            <main>
+                <div class="card">
+                    <h2>La Realtà del Mercato (NASDAQ-100)</h2>
+                    <canvas id="mainChart"></canvas>
+                    <div class="stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Patrimonio Finale Totale</span>
+                            <span class="stat-val" id="finalVal">0€</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Costo Opportunità Perso</span>
+                            <span class="stat-val highlight" id="feeDrag">0€</span>
+                        </div>
                     </div>
                 </div>
 
-                <hr>
-                
-                <label>Interesse TR su Liquidità (%)</label>
-                <input type="number" id="trInterest" value="2" step="0.1">
-            </div>
-
-            <div class="card">
-                <h2>Confronto Broker</h2>
-                <div style="display: flex; justify-content: space-between;">
-                    <span>Fineco (Standard):</span> <strong>19€</strong>
+                <div class="card" style="border-left: 5px solid #16a34a;">
+                    <h2>Il Costo dell'Inerzia</h2>
+                    <p>Mentre aspetti, i tuoi 6.000€ fermi potrebbero rendere:</p>
+                    <p><span id="cashGain" class="stat-val" style="display: inline; color: #16a34a;">0€</span> in <span
+                            class="yearLabel">10</span> anni su Trade Republic.</p>
+                    <p style="font-size: 0.8em; color: #64748b; margin-top: 15px;">
+                        *Nota: Il Market Timing riduce il rendimento perché chi entra ed esce dal mercato spesso perde i
+                        giorni migliori.
+                        Storicamente, mancare i 10 giorni migliori di un decennio riduce il rendimento di quasi il 50%.
+                    </p>
                 </div>
-                <div style="display: flex; justify-content: space-between;">
-                    <span>Trade Republic:</span> <strong>1€</strong>
-                </div>
-            </div>
-        </aside>
-
-        <main>
-            <div class="card">
-                <h2>La Realtà del Mercato (NASDAQ-100)</h2>
-                <canvas id="mainChart"></canvas>
-                <div class="stats">
-                    <div class="stat-box">
-                        <span class="stat-label">Patrimonio Finale Totale</span>
-                        <span class="stat-val" id="finalVal">0€</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-label">Costo Opportunità Perso</span>
-                        <span class="stat-val highlight" id="feeDrag">0€</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" style="border-left: 5px solid #16a34a;">
-                <h2>Il Costo dell'Inerzia</h2>
-                <p>Mentre aspetti, i tuoi 6.000€ fermi potrebbero rendere:</p>
-                <p><span id="cashGain" class="stat-val" style="display: inline; color: #16a34a;">0€</span> in <span class="yearLabel">10</span> anni su Trade Republic.</p>
-                <p style="font-size: 0.8em; color: #64748b; margin-top: 15px;">
-                    *Nota: Il Market Timing riduce il rendimento perché chi entra ed esce dal mercato spesso perde i giorni migliori. 
-                    Storicamente, mancare i 10 giorni migliori di un decennio riduce il rendimento di quasi il 50%.
-                </p>
-            </div>
-        </main>
+            </main>
+        </div>
     </div>
-</div>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>

@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
-import http.server, webbrowser, sys
+import subprocess, webbrowser, sys, time
 
 PORT = 8000
 URL = f"http://localhost:{PORT}/"
 
 print(f"--- webriicola testing @ {URL} ---")
 if "--open" in sys.argv or "-o" in sys.argv: 
+    time.sleep(0.5)
     webbrowser.open(URL)
     print("Opening web browser...")
 
-# http.server.test handles the server loop and address reuse automatically
-http.server.test(http.server.SimpleHTTPRequestHandler, port=PORT)
+try:
+    subprocess.run(["php", "-S", f"localhost:{PORT}"])
+except KeyboardInterrupt:
+    print("\nShutting down server")
