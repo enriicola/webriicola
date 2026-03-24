@@ -17,6 +17,7 @@ fi
 # sync to Nginx dest_path
 sudo rsync -av --delete \
     --exclude='*git*' \
+    --exclude='.jj*' \
     --exclude='*.sh' \
     --exclude='*.md' \
     --exclude='*.py' \
