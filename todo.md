@@ -6,5 +6,4 @@
 - [x] IPA pronunciation
 - [ ] add visitors info and other data tracking info and dashboards
 - [ ] add grafana etc?
-- [x] add jj version control system
 - [ ] ...
