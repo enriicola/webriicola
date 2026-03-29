@@ -46,6 +46,8 @@ usort($projects, function($a, $b) {
             <p class="subtitle">My personal website! A collection of mini webapps</p>
         </header>
 
+        <script src="https://keepandroidopen.org/banner.js"></script>
+
         <main class="grid">
             <?php foreach ($projects as $project): ?>
                 <a href="<?= htmlspecialchars($project['path']) ?>/" class="card">
