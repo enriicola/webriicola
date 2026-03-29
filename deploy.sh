@@ -20,6 +20,7 @@ sudo rsync -av --delete \
     --exclude='.jj*' \
     --exclude='*.sh' \
     --exclude='*.md' \
+    --exclude='*.bak' \
     --exclude='*.py' \
     "$SRC_PATH/" "$DEST_PATH/"
 
