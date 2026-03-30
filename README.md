@@ -10,6 +10,7 @@ ps: i hate node_modules
 ## todos
 
 - [ ] sticky show random gohan button
+- [ ] add a ventoy instance to the server in general, not only webriicola, in order to install isos from every online pc
 - [ ] expose webriicola to my public ddns url, in order to change url from the tailscale funnel one, to a more appropriate one
 - [ ] disney minus
   - <https://docs.seerr.dev>
@@ -26,4 +27,5 @@ ps: i hate node_modules
 - [x] IPA pronunciation
 - [ ] add visitors info and other data tracking info and dashboards
 - [ ] add grafana etc?
-- [ ] ...
+- [ ] searXNG selfhosted instance
+- [ ] nectcloud (or some other cloud drive) instance
