@@ -26,4 +26,5 @@ ps: i hate node_modules
 - [x] IPA pronunciation
 - [ ] add visitors info and other data tracking info and dashboards
 - [ ] add grafana etc?
-- [ ] ...
+- [ ] searXNG selfhosted instance
+- [ ] nectcloud (or some other cloud drive) instance
