@@ -12,7 +12,7 @@ ps: i hate node_modules
 - [ ] sticky show random gohan button
 - [ ] add a ventoy instance to the server in general, not only webriicola, in order to install isos from every online pc
 - [ ] expose webriicola to my public ddns url, in order to change url from the tailscale funnel one, to a more appropriate one
-- [ ] disney minus
+- [ ] disney minus and disney plusplus
   - <https://docs.seerr.dev>
   - <https://github.com/seerr-team/seerr>
   - <https://jellyfin.org>
